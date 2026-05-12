@@ -1,12 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { AppService, FraudResponse, TransactionBodyDto } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('ready')
+  isReady(): string {
+    return 'The application is ready!';
+  }
+
+  @Post('fraud-score')
+  fraudScore(@Body() body: TransactionBodyDto): FraudResponse {
+    return this.appService.execute(body);
   }
 }
