@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  api1:
+    build: .
+    container_name: api1
+    expose:
+      - "3000"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.45'
+          memory: 168mb
+    restart: always
+
+  api2:
+    build: .
+    container_name: api2
+    expose:
+      - "3000"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.45'
+          memory: 168mb
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    depends_on:
+      - api1
+      - api2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 14mb
+    restart: always

@@ -1,0 +1,12 @@
+{
+  "name": "rinha-de-backend-nestjs",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "node --watch src/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
